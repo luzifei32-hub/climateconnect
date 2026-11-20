@@ -88,6 +88,175 @@
 @media(max-height:650px){.welcome-overlay{padding:18px 25px 16px}.welcome-art{min-height:115px;margin:5px 0 0}.welcome-copy{min-height:125px}.welcome-copy h2{font-size:26px;margin:8px 0}.welcome-copy p{font-size:11px}.welcome-dots{margin-bottom:10px}.welcome-next{min-height:43px}.welcome-under{margin-top:7px}}
 @media(prefers-reduced-motion:reduce){.scroll-view{will-change:auto}.welcome-overlay,.celebration-layer{backdrop-filter:none}}
 
+/* ===== Weather widget (added) ===== */
+.wx{position:relative;height:194px;border-radius:25px;color:#fff;overflow:hidden;margin:0 0 14px;box-shadow:0 12px 26px #1b4a6a2b;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.wx-fx{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.wx-info{position:absolute;left:17px;top:13px;z-index:1}
+.wx-loc{font-size:12px;font-weight:800;display:flex;gap:4px;align-items:center}
+.wx-loc svg{width:13px;height:13px}
+.wx-temp{font-size:44px;font-weight:300;line-height:1;letter-spacing:-1px;margin:2px 0 1px;font-variant-numeric:tabular-nums}
+.wx-cond{font-size:11.5px;font-weight:750;opacity:.95;font-variant-numeric:tabular-nums}
+.wx-pick{position:absolute;right:12px;top:12px;z-index:4;display:flex;gap:4px;background:#00000024;border-radius:20px;padding:3px}
+.wx-pick button{width:26px;height:26px;border:0;border-radius:50%;background:transparent;color:#fff;display:grid;place-items:center;padding:0;transition:background .2s,transform .2s var(--motion)}
+.wx-pick button svg{width:15px;height:15px}
+.wx-pick button.on{background:#fff;color:#245b7a}
+.wx-pick button:active{transform:scale(.88)}
+.sheet .btn-solid svg{width:16px;height:16px;flex:none}
+.wx-more{margin-left:6px;font-size:10px;font-weight:800;background:#ffffff2e;border:1px solid #ffffff3d;border-radius:20px;padding:3px 8px}
+.scene{position:absolute;left:0;right:0;bottom:0;height:106px;z-index:2;cursor:pointer}
+.ground-clip{position:absolute;left:0;right:0;bottom:0;height:31px;overflow:hidden}
+.ground{position:absolute;left:-12%;right:-12%;top:0;height:70px;border-radius:50% 50% 0 0/100% 100% 0 0}
+.walker{position:absolute;left:0;bottom:9px;width:56px;height:85px;border:0;background:none;padding:0;z-index:2;will-change:transform;--amp:26deg;--dur:.62s;--lean:3deg}
+.walker.running{--amp:42deg;--dur:.36s;--lean:10deg}
+.walker.against{--lean:13deg}
+.walker .flip,.walker .bob{display:block;width:100%;height:100%}
+.walker .flip{transition:transform .22s ease}
+.walker svg{width:100%;height:100%;overflow:visible}
+.walker .shadow{position:absolute;left:50%;bottom:-3px;width:34px;height:7px;margin-left:-17px;border-radius:50%;background:#0b2a1e38}
+.walker g{transition:transform .25s ease}
+.rig{transform-origin:23px 65px}
+.legL{transform-origin:19.2px 44px}.shinL{transform-origin:19.2px 53px}
+.legR{transform-origin:26.7px 44px}.shinR{transform-origin:26.7px 53px}
+.armL{transform-origin:12.7px 28px}.foreL{transform-origin:12.7px 36px}
+.armR{transform-origin:33.2px 28px}.foreR{transform-origin:33.2px 36px}
+.head{transform-origin:23px 24px}.eyes{transform-origin:25.5px 15.5px;animation:wkBlink 4.2s infinite}
+.hold{transform-origin:33px 30px}
+.glint{animation:wkGlint 3s ease-in-out infinite}
+.puff{opacity:0;transform-origin:35px 19px}
+.scarf-tail{transform-origin:15px 26px;animation:wkFlutter .45s ease-in-out infinite alternate}
+.walker:not(.moving) .head{animation:wkIdleHead 6s ease-in-out infinite}
+.walker:not(.moving) .rig{animation:wkBreathe 2.6s ease-in-out infinite alternate}
+.moving .legL{animation:wkThigh var(--dur) ease-in-out infinite}
+.moving .legR{animation:wkThigh var(--dur) ease-in-out infinite;animation-delay:calc(var(--dur)/-2)}
+.moving .shinL{animation:wkShin var(--dur) linear infinite}
+.moving .shinR{animation:wkShin var(--dur) linear infinite;animation-delay:calc(var(--dur)/-2)}
+.moving .armR{animation:wkArm var(--dur) ease-in-out infinite}
+.moving .armL{animation:wkArm var(--dur) ease-in-out infinite;animation-delay:calc(var(--dur)/-2)}
+.moving .fore{transform:rotate(-30deg)}
+.running .fore{transform:rotate(-75deg)}
+.moving .rig{animation:wkBob calc(var(--dur)/2) ease-in-out infinite alternate}
+.moving .head{animation:wkNod calc(var(--dur)/2) ease-in-out infinite alternate}
+.moving .hold{animation:wkUmb var(--dur) ease-in-out infinite!important}
+.walker .hold{animation:none}
+/* one-off actions */
+.act-jump .rig{animation:wkJump .7s var(--motion)!important}
+.act-jump .shadow{animation:wkShadow .7s var(--motion)}
+.act-jump .free,.act-jump .armL{animation:none!important;transform:rotate(-165deg)}
+.act-spin .bob{animation:wkSpin .7s var(--motion)}
+.act-wave .free{animation:none!important;transform:rotate(-150deg)}
+.act-wave .free .fore{animation:wkWave .28s ease-in-out infinite alternate}
+.act-wave .head{animation:none!important;transform:rotate(6deg)}
+.act-look .head{animation:none!important;transform:rotate(-18deg)}
+.act-look .free{animation:none!important;transform:rotate(-125deg)}
+.act-look .free .fore{transform:rotate(-80deg)}
+.act-wipe .free{animation:none!important;transform:rotate(-118deg)}
+.act-wipe .free .fore{animation:wkWipe .5s ease-in-out infinite alternate}
+.act-shiver .rig{animation:wkShiver .1s linear infinite!important}
+.act-shiver .armR,.act-shiver .armL{animation:none!important;transform:rotate(-38deg)}
+.act-shiver .fore{transform:rotate(-105deg)}
+.act-shiver .puff{animation:wkPuff 1s ease-out infinite}
+.act-splash .rig{animation:wkJump .55s var(--motion) 2!important}
+.act-splash .shadow{animation:wkShadow .55s var(--motion) 2}
+.act-lean .rig{animation:none!important;transform:rotate(15deg)}
+.act-lean .free{animation:none!important;transform:rotate(-140deg)}
+.act-lean .free .fore{transform:rotate(-70deg)}
+.act-lean .scarf-tail{animation-duration:.18s}
+.act-change .bob{animation:wkPoof .65s var(--motion)}
+.act-change::after{content:"";position:absolute;left:50%;top:50%;width:14px;height:14px;margin:-7px;border-radius:50%;border:2px solid #fff;animation:wkRing .65s ease-out forwards;pointer-events:none}
+.bubble{position:absolute;bottom:96px;left:0;max-width:190px;width:max-content;background:#fff;color:#193d32;font-size:10.5px;font-weight:750;line-height:1.4;padding:6px 9px;border-radius:13px 13px 13px 4px;box-shadow:0 8px 18px #0003;opacity:0;transform:translateY(6px) scale(.9);transform-origin:0 100%;transition:opacity .2s,transform .25s var(--motion);pointer-events:none;z-index:5}
+.bubble.on{opacity:1;transform:none}
+.fx-print{position:absolute;bottom:11px;width:7px;height:3px;border-radius:50%;background:#aebfd0;animation:wkFade 2.6s forwards;pointer-events:none}
+.fx-ripple{position:absolute;bottom:9px;width:6px;height:3px;border:1px solid #ffffffd0;border-radius:50%;animation:wkRipple .7s ease-out forwards;pointer-events:none}
+.fx-dust{position:absolute;bottom:11px;width:6px;height:6px;border-radius:50%;background:#ffffffa0;animation:wkDust .5s ease-out forwards;pointer-events:none}
+.fx-splash{position:absolute;bottom:12px;width:3px;height:6px;border-radius:3px;background:#e4f2ff;animation:wkSplash .55s ease-out forwards;pointer-events:none}
+.sun{position:absolute;right:26px;top:50px;width:40px;height:40px;border-radius:50%;background:radial-gradient(circle,#fff6c2,#ffd84d 62%);box-shadow:0 0 0 9px #ffe98a38,0 0 34px #ffe27a;animation:ccBreathe 4s ease-in-out infinite}
+.cloud{position:absolute;width:64px;height:20px;border-radius:20px;background:#fff;animation:wkDrift 7s ease-in-out infinite alternate}
+.cloud::before,.cloud::after{content:"";position:absolute;border-radius:50%;background:inherit}
+.cloud::before{width:26px;height:26px;left:10px;top:-12px}
+.cloud::after{width:20px;height:20px;left:32px;top:-8px}
+.drop{position:absolute;top:-12%;width:2px;height:12px;border-radius:2px;background:#ffffffb5;transform:rotate(12deg);animation:wkFall 1s linear infinite}
+.flake{position:absolute;top:-6%;width:5px;height:5px;border-radius:50%;background:#fff;opacity:.92;animation:wkSnow 5s linear infinite}
+.gust{position:absolute;left:-30%;height:2px;width:90px;border-radius:2px;background:linear-gradient(90deg,transparent,#ffffffd0,transparent);animation:wkGust 2.2s linear infinite}
+/* richer character + bird friend */
+.pinwheel{transform-origin:39px 30px;animation:wkSpinZ .5s linear infinite}
+.act-lean .pinwheel{animation-duration:.16s}
+.hairblow{transform-origin:14px 10px;animation:wkFlutter .3s ease-in-out infinite alternate}
+.note{opacity:0;animation:wkNote 2.4s ease-out infinite}
+.note.n2{animation-delay:-1.2s}
+.walker .mouth{opacity:0;transform-origin:25.2px 20.6px}
+.walker.talking .mouth{opacity:1;animation:wkMouth .2s ease-in-out infinite alternate}
+.walker.talking .smile{opacity:0}
+.walker.talking:not(.moving) .free{transform:rotate(-55deg)}
+.walker.talking:not(.moving) .free .fore{transform:rotate(-70deg)}
+.pal{position:absolute;left:0;bottom:11px;width:30px;height:28px;border:0;background:none;padding:0;z-index:2;will-change:transform}
+.pal .flip,.pal .pb{display:block;width:100%;height:100%}
+.pal .flip{transition:transform .2s ease}
+.pal svg{width:100%;height:100%;overflow:visible}
+.pal .bhead{transform-origin:16px 14px}
+.pal .wing{transform-origin:13px 12px}
+.pal:not(.hop):not(.chirp) .bhead{animation:wkPeck 5s ease-in-out infinite}
+.pal.hop .pb,.pal.chirp .pb{animation:wkHop .28s ease-in-out infinite}
+.pal.hop .wing,.pal.fly .wing,.pal.chirp .wing{animation:wkFlap .1s linear infinite alternate}
+.pal.chirp .bhead{transform:rotate(-14deg)}
+.pal.fly .pb{animation:wkFly 1.2s var(--motion)!important}
+.bubble.from-pal{background:#eaf7df}
+.bubble.flipb{border-radius:13px 13px 4px 13px;transform-origin:100% 100%}
+@keyframes wkSpinZ{to{transform:rotate(360deg)}}
+@keyframes wkNote{0%{opacity:0;transform:translate(0,4px)}25%{opacity:1}100%{opacity:0;transform:translate(5px,-10px)}}
+@keyframes wkMouth{from{transform:scaleY(.35)}to{transform:scaleY(1)}}
+@keyframes wkHop{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+@keyframes wkPeck{0%,70%,100%{transform:rotate(0)}76%,84%{transform:rotate(30deg)}80%{transform:rotate(12deg)}}
+@keyframes wkFlap{from{transform:rotate(-38deg)}to{transform:rotate(26deg)}}
+@keyframes wkFly{0%,100%{transform:translate(0,0)}30%{transform:translate(7px,-38px) rotate(-16deg)}62%{transform:translate(-9px,-46px) rotate(10deg)}}
+/* detail sheet */
+.wxd{clear:both;position:relative;border-radius:22px;color:#fff;overflow:hidden;padding:16px 14px 14px;margin:6px 0 12px}
+.wxd-top{position:relative;z-index:1;padding:0 4px 6px}
+.wxd .wx-temp{font-size:58px}
+.wxd-pick{position:relative;z-index:1;display:flex;gap:6px;margin-top:8px}
+.wxd-pick button{flex:1;min-width:0;border:1px solid #ffffff3d;background:#ffffff24;color:#fff;border-radius:13px;padding:7px 2px 6px;display:grid;justify-items:center;gap:3px;font-size:10px;font-weight:800}
+.wxd-pick button svg{width:17px;height:17px}
+.wxd-pick button.on{background:#fff;color:#245b7a}
+.wxd-panel{position:relative;z-index:1;margin-top:10px;background:#0000002b;border-radius:15px;padding:10px 12px}
+.wxd-cap{font-size:9.5px;font-weight:850;letter-spacing:1px;opacity:.8;margin-bottom:8px;text-transform:uppercase}
+.wx-hours{display:flex;justify-content:space-between;text-align:center;font-size:10.5px;font-weight:700}
+.wx-hours div{display:grid;gap:6px;justify-items:center}
+.wx-hours svg,.wx-day svg{width:15px;height:15px}
+.wx-hours b{font-size:12.5px;font-variant-numeric:tabular-nums}
+.wx-day{display:grid;grid-template-columns:48px 18px 28px 1fr 28px;align-items:center;gap:8px;font-size:12px;font-weight:700;padding:6px 0;border-top:1px solid #ffffff24;font-variant-numeric:tabular-nums}
+.wx-day:first-of-type{border-top:0}
+.wx-day .lo{opacity:.72;text-align:right}
+.wx-bar{height:5px;border-radius:5px;background:#00000033;position:relative}
+.wx-bar i{position:absolute;top:0;bottom:0;border-radius:5px;background:linear-gradient(90deg,#9bdcff,#ffe27a,#ffa45c)}
+.still,.still .sheet{animation:none!important}
+@keyframes wkThigh{0%,100%{transform:rotate(calc(var(--amp)*-1))}50%{transform:rotate(var(--amp))}}
+@keyframes wkShin{0%{transform:rotate(4deg)}50%{transform:rotate(16deg)}74%{transform:rotate(66deg)}100%{transform:rotate(4deg)}}
+@keyframes wkArm{0%,100%{transform:rotate(calc(var(--amp)*-.8))}50%{transform:rotate(calc(var(--amp)*.8))}}
+@keyframes wkBob{from{transform:translateY(.7px) rotate(var(--lean))}to{transform:translateY(-1.5px) rotate(var(--lean))}}
+@keyframes wkNod{from{transform:rotate(-2.5deg)}to{transform:rotate(2.5deg)}}
+@keyframes wkUmb{0%,100%{transform:rotate(-4deg)}50%{transform:rotate(4deg)}}
+@keyframes wkBreathe{from{transform:scale(1,1)}to{transform:scale(1.015,.985)}}
+@keyframes wkIdleHead{0%,55%,100%{transform:rotate(0)}65%,75%{transform:rotate(-10deg)}85%,92%{transform:rotate(7deg)}}
+@keyframes wkBlink{0%,93%,100%{transform:scaleY(1)}96%{transform:scaleY(.1)}}
+@keyframes wkGlint{0%,70%,100%{opacity:0}80%{opacity:1}}
+@keyframes wkFlutter{from{transform:rotate(-8deg)}to{transform:rotate(12deg)}}
+@keyframes wkJump{0%,100%{transform:none}14%{transform:translateY(2px) scale(1.14,.84)}46%{transform:translateY(-24px) scale(.93,1.09)}76%{transform:translateY(0) scale(1.1,.88)}}
+@keyframes wkShadow{0%,100%{transform:scale(1);opacity:1}46%{transform:scale(.55);opacity:.5}}
+@keyframes wkSpin{from{transform:rotateY(0)}to{transform:rotateY(360deg)}}
+@keyframes wkWave{from{transform:rotate(18deg)}to{transform:rotate(-38deg)}}
+@keyframes wkWipe{from{transform:rotate(-80deg)}to{transform:rotate(-105deg)}}
+@keyframes wkShiver{0%,100%{transform:translateX(-.9px)}50%{transform:translateX(.9px)}}
+@keyframes wkPuff{0%{opacity:.85;transform:none}100%{opacity:0;transform:translate(7px,-4px) scale(2)}}
+@keyframes wkPoof{0%{transform:scale(1) rotate(0)}40%{transform:scale(.08) rotate(200deg)}100%{transform:scale(1) rotate(360deg)}}
+@keyframes wkRing{from{transform:scale(.5);opacity:1}to{transform:scale(6);opacity:0}}
+@keyframes wkFade{0%{opacity:.9}100%{opacity:0}}
+@keyframes wkRipple{from{transform:scale(.6);opacity:1}to{transform:scale(3.4,2.2);opacity:0}}
+@keyframes wkDust{from{transform:none;opacity:.9}to{transform:translate(var(--dx),-9px) scale(2);opacity:0}}
+@keyframes wkSplash{0%{transform:none;opacity:1}100%{transform:translate(var(--dx),-22px);opacity:0}}
+@keyframes wkDrift{from{transform:translateX(-10px)}to{transform:translateX(14px)}}
+@keyframes wkFall{to{top:104%}}
+@keyframes wkSnow{to{top:104%;margin-left:18px}}
+@keyframes wkGust{0%{left:-30%;opacity:0}20%{opacity:1}100%{left:110%;opacity:0}}
+
 </style>
 </head>
 <body>
@@ -98,7 +267,7 @@
 const SKEY='cc-iteration-v1';
 function load(){try{return JSON.parse(localStorage.getItem(SKEY)||'{}')||{}}catch(e){return {}}}
 let saved=load();
-let state={tab:'explore',topic:'All',lang:saved.lang||'en',rating:0,helpful:'',category:'Clarity',message:'',modal:null,quiz: saved.quiz||'',completed: saved.completed||[],feedback: saved.feedback||[]};
+let state={weather:saved.weather||'sunny',tab:'explore',topic:'All',lang:saved.lang||'en',rating:0,helpful:'',category:'Clarity',message:'',modal:null,quiz: saved.quiz||'',completed: saved.completed||[],feedback: saved.feedback||[]};
 let introWasSeen=false;try{introWasSeen=sessionStorage.getItem('cc-intro-seen-animated-v1')==='yes'}catch(e){}
 state.onboarding=!introWasSeen;state.introStep=0;
 const T={
@@ -117,19 +286,158 @@ const tasks=[{id:'walk',emoji:'🚲',pts:15,title:{en:'Walk or cycle one short t
 {id:'energy',emoji:'💡',pts:10,title:{en:'Switch off unused lights',zh:'关掉不需要的灯'},desc:{en:'Check your room and turn off lights not in use.',zh:'检查房间，关闭未使用的灯光。'}},
 {id:'source',emoji:'🔎',pts:20,title:{en:'Check a climate claim',zh:'核查一条气候信息'},desc:{en:'Open an IPCC or NASA source and compare the claim.',zh:'打开 IPCC 或 NASA 原文核对信息。'}},
 {id:'share',emoji:'📢',pts:15,title:{en:'Share a reliable resource',zh:'分享可靠气候资料'},desc:{en:'Send one verified climate resource to a friend.',zh:'向朋友分享一份附有可靠来源的资料。'}}];
-function save(){try{localStorage.setItem(SKEY,JSON.stringify({lang:state.lang,quiz:state.quiz,completed:state.completed,feedback:state.feedback}))}catch(e){}}
+function save(){try{localStorage.setItem(SKEY,JSON.stringify({weather:state.weather,lang:state.lang,quiz:state.quiz,completed:state.completed,feedback:state.feedback}))}catch(e){}}
 function tr(k){return T[state.lang][k]||k}function loc(obj){return obj[state.lang]||obj.en}
 function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
-function ico(n){const paths={leaf:'<path d="M11 20A7 7 0 0 1 4 13C4 6 13 3 21 3c0 8-3 17-10 17Z"/><path d="M4 21c4-6 7-9 12-12"/>',home:'<path d="m3 11 9-8 9 8"/><path d="M5 10v11h14V10"/><path d="M9 21v-7h6v7"/>',book:'<path d="M12 7v14"/><path d="M3 18V4a1 1 0 0 1 1-1h5a3 3 0 0 1 3 3 3 3 0 0 1 3-3h5a1 1 0 0 1 1 1v14h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/>',shield:'<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/><path d="m9 12 2 2 4-4"/>',chat:'<path d="M21 11.5a8.4 8.4 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.4 8.4 0 0 1-3.8-.9L3 21l1.9-5.7a8.4 8.4 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.4 8.4 0 0 1 3.8-.9h.5a8.5 8.5 0 0 1 8 8v.5Z"/>',award:'<circle cx="12" cy="8" r="6"/><path d="m8.2 13.7-1 8.3 4.8-2.5 4.8 2.5-1-8.3"/>',arrow:'<path d="M5 12h14m-6-6 6 6-6 6"/>',check:'<path d="m5 12 4 4L19 6"/>',x:'<path d="M18 6 6 18M6 6l12 12"/>',globe:'<circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15 15 0 0 1 0 20 15 15 0 0 1 0-20"/>',external:'<path d="M15 3h6v6M10 14 21 3"/><path d="M21 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h6"/>',reset:'<path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/>',heart:'<path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/>',info:'<circle cx="12" cy="12" r="10"/><path d="M12 11v6m0-10h.01"/>'};return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${paths[n]||paths.leaf}</svg>`}
+function ico(n){const paths={leaf:'<path d="M11 20A7 7 0 0 1 4 13C4 6 13 3 21 3c0 8-3 17-10 17Z"/><path d="M4 21c4-6 7-9 12-12"/>',home:'<path d="m3 11 9-8 9 8"/><path d="M5 10v11h14V10"/><path d="M9 21v-7h6v7"/>',book:'<path d="M12 7v14"/><path d="M3 18V4a1 1 0 0 1 1-1h5a3 3 0 0 1 3 3 3 3 0 0 1 3-3h5a1 1 0 0 1 1 1v14h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/>',shield:'<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/><path d="m9 12 2 2 4-4"/>',chat:'<path d="M21 11.5a8.4 8.4 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.4 8.4 0 0 1-3.8-.9L3 21l1.9-5.7a8.4 8.4 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.4 8.4 0 0 1 3.8-.9h.5a8.5 8.5 0 0 1 8 8v.5Z"/>',award:'<circle cx="12" cy="8" r="6"/><path d="m8.2 13.7-1 8.3 4.8-2.5 4.8 2.5-1-8.3"/>',arrow:'<path d="M5 12h14m-6-6 6 6-6 6"/>',check:'<path d="m5 12 4 4L19 6"/>',x:'<path d="M18 6 6 18M6 6l12 12"/>',globe:'<circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15 15 0 0 1 0 20 15 15 0 0 1 0-20"/>',external:'<path d="M15 3h6v6M10 14 21 3"/><path d="M21 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h6"/>',reset:'<path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/>',heart:'<path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/>',info:'<circle cx="12" cy="12" r="10"/><path d="M12 11v6m0-10h.01"/>',sun:'<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>',cloud:'<path d="M17.5 19H9a7 7 0 1 1 6.7-9h1.8a4.5 4.5 0 1 1 0 9Z"/>',rain:'<path d="M4 14.9A7 7 0 1 1 15.7 8h1.8a4.5 4.5 0 0 1 2.5 8.2"/><path d="M16 14v6M8 14v6M12 16v6"/>',snow:'<path d="M12 2v20M3.3 7l17.4 10M20.7 7 3.3 17"/>',wind:'<path d="M17.7 7.7A2.5 2.5 0 1 1 19.5 12H2M9.6 4.6A2 2 0 1 1 11 8H2M12.6 19.4A2 2 0 1 0 14 16H2"/>',pin:'<path d="M12 22s7-6.2 7-12a7 7 0 0 0-14 0c0 5.8 7 12 7 12Z"/><circle cx="12" cy="10" r="2.5"/>'};return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${paths[n]||paths.leaf}</svg>`}
 function cover(){return `<svg viewBox="0 0 230 210" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="161" cy="71" r="58" fill="#F5F8D3"/><path d="M32 209c27-64 69-79 122-67 37 8 60 28 78 49v18H32Z" fill="#8EBCA1"/><path d="M56 208c26-37 55-54 100-53 35 2 61 25 74 42v11H56Z" fill="#529474"/><path d="M124 206c-2-37 7-84 15-106" stroke="#365E49" stroke-width="9" stroke-linecap="round"/><path d="M138 120c-45 5-52-21-35-42 16-19 44-7 47 16 2-34 35-47 56-25 17 18 5 47-34 51 39-11 64 11 47 34-14 18-38 19-68 1-21 25-51 28-64 11-19-24 12-49 51-46Z" fill="#3A8866"/><path d="M149 128c12-13 28-23 40-30M139 139c-12-11-24-21-36-25" stroke="#78B78C" stroke-width="4" stroke-linecap="round"/><circle cx="75" cy="58" r="3" fill="#7AAA85"/><circle cx="218" cy="27" r="3" fill="#7AAA85"/></svg>`}
 function points(){return tasks.filter(t=>state.completed.includes(t.id)).reduce((sum,t)=>sum+t.pts,0)+(state.quiz==='q2'?10:0)}
+/* ===== Weather widget (added). Sample data: the page cannot fetch a live forecast. ===== */
+const L=p=>state.lang==='en'?p[1]:p[0];
+const WX={
+ sunny:{n:['晴','Sunny'],icon:'sun',t:22,sky:'linear-gradient(170deg,#3a94e2,#8fd0f5 72%)',ground:'#6fbf73',special:'wipe',wear:['T 恤、帽子和墨镜','T-shirt, cap and sunglasses'],tip:['天气晴朗，短途骑车或步行吧','Clear skies: cycle or walk the short trips'],say:[['阳光真好，我们骑车去吧！','Lovely sun. Let\'s cycle today!'],['出门记得带上水杯。','Bring your refillable bottle.'],['有点热，走树荫下吧。','Warm out here. Let\'s take the shady path.']],days:[['sun',14,24],['sun',13,23],['cloud',12,20],['rain',10,16],['sun',12,21]]},
+ cloudy:{n:['多云','Cloudy'],icon:'cloud',t:15,sky:'linear-gradient(170deg,#6f879e,#b4c3d0 75%)',ground:'#6aa878',special:'look',wear:['连帽卫衣','A cosy hoodie'],tip:['多云不晒，正适合走路出行','Mild and cloudy: a good day to walk'],say:[['不晒也不冷，走路刚刚好。','Not hot, not cold. Perfect for a walk.'],['白天也记得关掉不用的灯。','Switch off lights you don\'t need.'],['看那朵云，像不像一棵树？','That cloud looks like a tree!']],days:[['cloud',10,17],['cloud',9,16],['rain',8,13],['cloud',9,15],['sun',10,18]]},
+ rain:{n:['小雨','Rain'],icon:'rain',t:11,sky:'linear-gradient(170deg,#3f556d,#7890a4 75%)',ground:'#4f8f68',special:'splash',wear:['雨衣、雨靴和雨伞','Raincoat, boots and umbrella'],tip:['下雨天，坐公交代替开车','Rainy day: take the bus instead of the car'],say:[['我带伞了！今天坐公交吧。','Umbrella ready! Let\'s take the bus.'],['踩水坑最好玩了！','Puddles are the best part!'],['雨水可以留着浇花。','Save some rainwater for the plants.']],days:[['rain',8,13],['rain',7,12],['cloud',8,14],['wind',7,13],['sun',6,14]]},
+ snow:{n:['小雪','Snow'],icon:'snow',t:-1,sky:'linear-gradient(170deg,#55769b,#9fb8d0 78%)',ground:'#f4f8fb',special:'shiver',wear:['羽绒服、围巾和毛线帽','Puffer coat, scarf and beanie'],tip:['多穿一层，把暖气调低 1°C','Layer up and turn the heating down 1°C'],say:[['好冷！多穿一层就暖和了。','Brr! One more layer keeps me warm.'],['暖气调低 1°C，也能省不少电。','Heating down 1°C saves energy.'],['看，我的脚印！','Look, my footprints!']],days:[['snow',-4,1],['snow',-5,0],['cloud',-3,2],['sun',-2,4],['cloud',0,5]]},
+ wind:{n:['大风','Windy'],icon:'wind',t:13,sky:'linear-gradient(170deg,#3f93a8,#a9d9d2 75%)',ground:'#62ad7c',special:'lean',wear:['防风外套和围巾','Windbreaker and scarf'],tip:['风大，衣服晾在外面干得快','Windy: line-dry your laundry outside'],say:[['风好大，围巾都飞起来了！','So windy, my scarf is flying!'],['晾衣服不用烘干机啦。','No tumble dryer needed today.'],['逆风走路好费劲！','Walking into the wind is hard work!']],days:[['wind',9,15],['wind',8,14],['rain',8,12],['cloud',7,13],['sun',8,15]]}
+};
+const WDAYS=[['周日','Sun'],['周一','Mon'],['周二','Tue'],['周三','Wed'],['周四','Thu'],['周五','Fri'],['周六','Sat']];
+function wxFx(w){
+  const many=(n,f)=>Array.from({length:n},(_,i)=>f(i)).join('');
+  const cloud=(l,t,sc,o,d)=>`<span class="cloud" style="left:${l}%;top:${t}px;scale:${sc};opacity:${o};animation-delay:-${d}s"></span>`;
+  if(w==='sunny')return `<span class="sun"></span>${cloud(42,62,.7,.7,2)}`;
+  if(w==='cloudy')return cloud(60,62,1.05,.95,0)+cloud(38,84,.8,.7,3)+cloud(80,92,.65,.6,5);
+  if(w==='rain')return cloud(58,60,1.05,.8,0)+cloud(80,84,.75,.6,3)+many(16,i=>`<i class="drop" style="left:${(i*37+5)%100}%;animation-delay:-${(i*.137)%1}s;animation-duration:${.8+(i%4)*.12}s"></i>`);
+  if(w==='snow')return cloud(60,60,1,.9,0)+many(16,i=>`<i class="flake" style="left:${(i*29+3)%100}%;animation-delay:-${(i*.61)%5}s;animation-duration:${4+(i%5)*.7}s;scale:${.6+(i%3)*.3}"></i>`);
+  return cloud(62,62,.95,.8,0)+many(5,i=>`<i class="gust" style="top:${52+i*24}px;animation-delay:-${i*.5}s;width:${70+i*14}px"></i>`);
+}
+function person(w){
+  const skin='#f3cfa6',skinD='#e0b48a',hair='#3b2a20';
+  const o={sunny:{top:'#ffd166',topD:'#f0b93a',sl:skin,leg:'#3d6b8c',shin:skin,shoe:'#ffffff',sole:'#e2574c',hand:skin},
+   cloudy:{top:'#6fae93',topD:'#5c9a80',sl:'#6fae93',leg:'#3b5876',shin:'#3b5876',shoe:'#f4f1e8',sole:'#1d2b36',hand:skin},
+   rain:{top:'#f6c945',topD:'#e0ae22',sl:'#f6c945',leg:'#2d4a63',shin:'#2f7d4f',shoe:'#2f7d4f',sole:'#1f5a38',hand:skin},
+   snow:{top:'#e2574c',topD:'#c4463c',sl:'#e2574c',leg:'#2d3f52',shin:'#2d3f52',shoe:'#7a5237',sole:'#4a3020',hand:'#ffffff'},
+   wind:{top:'#5b8def',topD:'#3f6fd0',sl:'#5b8def',leg:'#2d4a63',shin:'#2d4a63',shoe:'#1d2b36',sole:'#bfe86b',hand:skin}}[w];
+  const legX=x=>({sunny:`<rect x="${x}" y="55.5" width="6.5" height="4.5" fill="#fff"/><rect x="${x}" y="56.4" width="6.5" height="1" fill="#e2574c"/>`,cloudy:`<rect x="${x-.3}" y="57" width="7.1" height="2.4" rx="1" fill="#8fb0cf"/>`,rain:`<rect x="${x-.4}" y="52.4" width="7.3" height="2.2" rx="1" fill="#57a877"/>`,snow:`<rect x="${x-.9}" y="55.6" width="8.3" height="3.2" rx="1.6" fill="#fff"/>`,wind:`<rect x="${x+5}" y="52" width="1.1" height="8" fill="#bfe86b"/>`}[w]);
+  const lace=x=>(w==='sunny'||w==='cloudy')?`<path d="M${x+4} 61.2h3" stroke="#9aa7b0" stroke-width=".8" stroke-linecap="round"/>`:'';
+  const leg=(s,x)=>`<g class="leg${s}"><rect x="${x}" y="43" width="6.5" height="12" rx="3.2" fill="${o.leg}"/>${w==='wind'?`<rect x="${x+5}" y="45" width="1.1" height="9" fill="#bfe86b"/>`:''}<g class="shin${s}"><rect x="${x}" y="52" width="6.5" height="11" rx="3.2" fill="${o.shin}"/>${legX(x)}<rect x="${x-.5}" y="59.5" width="10.5" height="5.5" rx="2.7" fill="${o.shoe}"/><rect x="${x-.5}" y="63.4" width="10.5" height="1.6" rx=".8" fill="${o.sole}"/>${lace(x)}</g></g>`;
+  const cuff=x=>(w==='cloudy'||w==='wind'||w==='snow')?`<rect x="${x-.3}" y="40.6" width="6.1" height="2.2" rx="1" fill="${o.topD}"/>`:'';
+  const pin='<path d="M33.2 44L39 30" stroke="#8a5a3a" stroke-width="1.3" stroke-linecap="round"/><g class="pinwheel"><path d="M39 30v-7l4.5 3.5Z" fill="#ff7a7a"/><path d="M39 30h7l-3.5 4.5Z" fill="#ffd166"/><path d="M39 30v7l-4.5-3.5Z" fill="#bfe86b"/><path d="M39 30h-7l3.5-4.5Z" fill="#7fd4ba"/><circle cx="39" cy="30" r="1.2" fill="#fff"/></g>';
+  const arm=(s,x,free)=>`<g class="arm${s} ${free?'free':''}"><rect x="${x}" y="27" width="5.5" height="10.5" rx="2.7" fill="${w==='sunny'?o.top:o.sl}"/>${w==='sunny'?`<rect x="${x}" y="35.3" width="5.5" height="1.4" fill="${o.topD}"/>`:''}<g class="fore fore${s}"><rect x="${x}" y="35" width="5.5" height="9" rx="2.7" fill="${o.sl}"/>${cuff(x)}${w==='sunny'&&s==='R'?'<rect x="30.3" y="40.2" width="5.9" height="2" rx="1" fill="#1d2b36"/><circle cx="33.2" cy="41.2" r="1.3" fill="#bfe86b"/>':''}<circle cx="${x+2.75}" cy="44" r="2.7" fill="${o.hand}"/>${w==='wind'&&s==='R'?pin:''}</g></g>`;
+  const back=w==='sunny'?'<rect x="6.5" y="33" width="8.5" height="11.5" rx="2" fill="#efe6cf"/><circle cx="10.7" cy="38.7" r="2" fill="#57a877"/>':w==='wind'?'<path class="scarf-tail" d="M15 26q-8-4-14 1" stroke="#bfe86b" stroke-width="5" stroke-linecap="round" fill="none"/><path class="scarf-tail" style="animation-delay:-.2s" d="M15 27q-7 1-11 6" stroke="#9fcf4f" stroke-width="4" stroke-linecap="round" fill="none"/>':w==='cloudy'?`<ellipse cx="17" cy="25.5" rx="8" ry="4" fill="${o.topD}"/>`:'';
+  const det={
+   sunny:`<path d="M13.3 33.5h19.4M13.3 38h19.4" stroke="#fff" stroke-width="1.7" opacity=".9"/><path d="M14.5 27.5L31 45" stroke="#efe6cf" stroke-width="1.7" stroke-linecap="round"/><circle cx="28" cy="29.8" r="1.7" fill="#2f7d4f"/>`,
+   cloudy:`<rect x="17.5" y="37.5" width="11" height="6.5" rx="3" fill="${o.topD}"/><rect x="13" y="44.8" width="20" height="3.2" rx="1.6" fill="${o.topD}"/><path d="M20.5 26.5v6M25.5 26.5v5" stroke="#fff" stroke-width=".9" stroke-linecap="round"/><circle cx="20.5" cy="33" r=".9" fill="#fff"/><circle cx="25.5" cy="32" r=".9" fill="#fff"/>`,
+   rain:`<path d="M23 27v24.5" stroke="${o.topD}" stroke-width="1"/><circle cx="25.2" cy="31" r=".9" fill="#fff"/><circle cx="25.2" cy="36.5" r=".9" fill="#fff"/><circle cx="25.2" cy="42" r=".9" fill="#fff"/><rect x="14.5" y="41" width="5.5" height="2.2" rx="1" fill="${o.topD}"/><rect x="26.5" y="44.5" width="5" height="2.2" rx="1" fill="${o.topD}"/><rect x="13" y="48" width="20" height="1.6" fill="#fff" opacity=".75"/>`,
+   snow:`<path d="M13.5 31.5h19M13.5 36.5h19M13.5 41.5h19" stroke="${o.topD}" stroke-width="1.2"/><path d="M23 28v19.5" stroke="#fff" stroke-width=".9" stroke-dasharray="1.2 1"/><rect x="26.5" y="42.5" width="4.5" height="1.3" rx=".6" fill="#fff" opacity=".8"/>`,
+   wind:`<path d="M13 33v-1a7 7 0 0 1 7-7h6a7 7 0 0 1 7 7v1Z" fill="${o.topD}"/><path d="M23 26v21" stroke="#bfe86b" stroke-width="1.1"/><rect x="13" y="44.8" width="20" height="3.2" rx="1.6" fill="${o.topD}"/><path d="M15.5 39.5h4M27 39.5h4" stroke="#bfe86b" stroke-width=".9" stroke-linecap="round"/>`}[w];
+  const body=`<rect x="13" y="25" width="20" height="${w==='rain'?27:23}" rx="7" fill="${o.top}"/>${det}`;
+  const neck={snow:'<rect x="13.5" y="23" width="19" height="5.5" rx="2.7" fill="#fff"/><path d="M17 23.5v4.5M21 23.5v4.5M25 23.5v4.5M29 23.5v4.5" stroke="#7fd4ba" stroke-width="1.1"/><rect x="16" y="26" width="5" height="11" rx="2" fill="#fff"/><path d="M16.3 32.5h4.4" stroke="#7fd4ba" stroke-width="1.1"/><path d="M17 37v2M18.5 37v2M20 37v2" stroke="#fff" stroke-width=".8" stroke-linecap="round"/>',wind:'<rect x="13.5" y="23" width="19" height="5.5" rx="2.7" fill="#bfe86b"/><path d="M14.5 25.8h17" stroke="#9fcf4f" stroke-width="1"/>',cloudy:'<path d="M14.5 25q8.5 5.5 17 0" stroke="#1d2b36" stroke-width="1.6" fill="none" stroke-linecap="round"/><rect x="12.3" y="22" width="4.2" height="6" rx="2" fill="#ff7a7a"/><rect x="29.5" y="22" width="4.2" height="6" rx="2" fill="#ff7a7a"/>'}[w]||'';
+  const rArm=w==='rain'?`<g class="hold"><rect x="30.5" y="19" width="5.5" height="13" rx="2.7" fill="${o.sl}" transform="rotate(-14 33 30)"/><circle cx="35.2" cy="20.5" r="2.6" fill="${skin}"/><path d="M35.5 24V-8" stroke="#5a3b2a" stroke-width="1.8" stroke-linecap="round"/><path d="M35.5 24q0 3-2.5 3" stroke="#5a3b2a" stroke-width="1.8" fill="none" stroke-linecap="round"/><path d="M9-5Q35.5-30 62-5Q53-10 44-5Q35.5-10 27-5Q18-10 9-5Z" fill="#bfe86b"/><path d="M27-5Q29-20 35.5-23.5Q42-20 44-5Q35.5-10 27-5Z" fill="#9fcf4f"/><path d="M35.5-21.5V-25" stroke="#5a3b2a" stroke-width="1.8" stroke-linecap="round"/><circle cx="9" cy="-3" r="1" fill="#d8ecff"/><circle cx="62" cy="-3" r="1" fill="#d8ecff"/></g>`:arm('R',30.5,true);
+  const hood=w==='rain'?`<circle cx="21.5" cy="15.5" r="11.8" fill="${o.top}"/>`:'';
+  const brows=w==='sunny'?'':`<path d="M21 12.3q1.5-1 3 0M27 12.3q1.5-1 3 0" stroke="${hair}" stroke-width=".9" fill="none" stroke-linecap="round"/>`;
+  const face=w==='sunny'?'<rect x="18.5" y="13.2" width="6" height="4" rx="1.8" fill="#1d2b36"/><rect x="26" y="13.2" width="6" height="4" rx="1.8" fill="#1d2b36"/><path d="M13.5 14.5h5M24.5 14.8h1.5" stroke="#1d2b36" stroke-width="1"/><path class="glint" d="M27.3 14.2l1.8 1.8" stroke="#fff" stroke-width=".9" stroke-linecap="round"/>':'<g class="eyes"><circle cx="22.5" cy="15.5" r="1.35" fill="#2a1d14"/><circle cx="28.5" cy="15.5" r="1.35" fill="#2a1d14"/><circle cx="22.9" cy="15.1" r=".4" fill="#fff"/><circle cx="28.9" cy="15.1" r=".4" fill="#fff"/></g>';
+  const hat={sunny:'<path d="M13 11.5a10 10 0 0 1 20 0Z" fill="#2f7d4f"/><rect x="29" y="9.5" width="10.5" height="2.6" rx="1.3" fill="#256b42"/><circle cx="24" cy="7" r="1.8" fill="#bfe86b"/>',snow:'<path d="M13 12a10 10 0 0 1 20 0Z" fill="#e2574c"/><path d="M14.5 7.5q8.5-4 17 0" stroke="#7fd4ba" stroke-width="1.4" fill="none"/><rect x="12.2" y="9.8" width="21.6" height="4" rx="2" fill="#fff"/><circle cx="23" cy="2.5" r="3" fill="#fff"/>',rain:`<path d="M12.3 13a10.7 10.7 0 0 1 21.4 0q-10.7-4.5-21.4 0Z" fill="${o.top}"/><path d="M12.3 13q10.7-4.5 21.4 0" stroke="${o.topD}" stroke-width="1" fill="none"/>`,wind:`<path class="hairblow" d="M14 9q-5-2-8 1M14 12q-5 0-7 3M15 7q-4-3-7-2" stroke="${hair}" stroke-width="1.6" fill="none" stroke-linecap="round"/>`,cloudy:'<text class="note" x="35" y="9" font-size="7" fill="#fff">♪</text><text class="note n2" x="39" y="4" font-size="6" fill="#fff">♫</text>'}[w];
+  const head=`<g class="head">${hood}<circle cx="13.6" cy="16.5" r="2.2" fill="${skinD}"/><circle cx="23" cy="15" r="10" fill="${skin}"/><path d="M13 14a10 10 0 0 1 20 0c-3-4-8-5-12-4-3 1-6 2-8 4Z" fill="${hair}"/><path d="M21.5 5.5q3-4 6.5-1.5-2.500.3-3.5 2.3Z" fill="${hair}"/>${brows}${face}<path d="M26.2 17.2q.9.7 0 1.4" stroke="${skinD}" stroke-width=".9" fill="none" stroke-linecap="round"/><path class="smile" d="M22.5 20q2.8 2.2 5.5 0" stroke="#8a4b33" stroke-width="1.2" fill="none" stroke-linecap="round"/><ellipse class="mouth" cx="25.2" cy="20.6" rx="2" ry="1.7" fill="#8a4b33"/><circle cx="19" cy="18.5" r="1.9" fill="#f2a58a" opacity="${w==='snow'?.9:.6}"/><circle cx="30.5" cy="18.5" r="1.5" fill="#f2a58a" opacity="${w==='snow'?.8:.45}"/>${hat}<circle class="puff" cx="35" cy="19" r="2.6" fill="#fff"/></g>`;
+  return `<svg viewBox="0 0 46 70" aria-hidden="true"><g class="rig">${back}${leg('L',16)}${leg('R',23.5)}${arm('L',10,w==='rain')}${body}${neck}${rArm}${head}</g></svg>`;
+}
+function bird(w){
+  const acc={sunny:'<rect x="18" y="7.2" width="4.4" height="2.3" rx="1.1" fill="#1d2b36"/>',cloudy:'<path d="M14.5 7.5a4.6 4.6 0 0 1 8.2-2.2" stroke="#1d2b36" stroke-width="1" fill="none"/><rect x="13.5" y="6.8" width="2.3" height="3.2" rx="1.1" fill="#ff7a7a"/>',rain:'<path d="M18.5 4V-4" stroke="#5a3b2a" stroke-width=".9" stroke-linecap="round"/><path d="M9-2.5Q18.5-11 28-2.5Q18.5-6 9-2.5Z" fill="#57a877"/><path d="M18.5-7.5V-3.8" stroke="#3c8a62" stroke-width=".7"/>',snow:'<path d="M13.8 6.2a5.3 5.3 0 0 1 9.6-1.8Z" fill="#e2574c"/><circle cx="17.8" cy="2.6" r="1.4" fill="#fff"/>',wind:'<path d="M16 4.5q-3-3-5.5-1M17.5 4q-2-3.5-4.5-2.5M19 3.8q-1-3-3-3" stroke="#4f93c6" stroke-width="1.2" fill="none" stroke-linecap="round"/>'}[w];
+  return `<svg viewBox="0 0 28 26" aria-hidden="true"><path d="M11 20v4.5M15 20v4.5M9.5 24.5h3M13.5 24.5h3" stroke="#d98a3a" stroke-width="1.2" stroke-linecap="round"/><path d="M6 14l-6.5-3 2 6.5Z" fill="#4f93c6"/><ellipse cx="13" cy="14" rx="8.5" ry="7" fill="#8ec5e8"/><ellipse cx="14.5" cy="16.5" rx="5.5" ry="4" fill="#fff3d6"/><ellipse class="wing" cx="10" cy="13.5" rx="5" ry="3.2" fill="#4f93c6"/>${w==='snow'?'<rect x="12.5" y="12.3" width="9" height="2.4" rx="1.2" fill="#e2574c"/><rect x="13.5" y="13.5" width="2.2" height="4.5" rx="1.1" fill="#e2574c"/>':''}<g class="bhead"><circle cx="18.5" cy="9" r="5.5" fill="#8ec5e8"/><path d="M23.3 8.3l4.4 1.7-4.4 1.7Z" fill="#f2a65a"/><circle cx="20" cy="8.3" r="1.15" fill="#1d2b36"/><circle cx="20.35" cy="7.95" r=".35" fill="#fff"/><circle cx="18" cy="11.2" r="1.2" fill="#f2a58a" opacity=".7"/>${acc}</g></svg>`;
+}
+const CONVO={
+ sunny:[[['p','天气真好！骑车去吧？','What a sunny day! Shall we cycle?'],['b','啾！我飞，你骑。','Chirp! I fly, you pedal.'],['p','成交，我们都零排放！','Deal. Zero emissions for both of us!']],
+  [['p','带上了我的水杯。','Got my refillable bottle.'],['b','不用塑料瓶？真棒！','No plastic? Nice one!']],
+  [['b','好热，找个树荫吧？','It\'s hot. Find some shade?'],['p','大树就是最好的空调。','Trees are the best air con.']]],
+ cloudy:[[['p','不晒也不下雨，适合走路！','No sun, no rain. Walking weather!'],['b','比比谁先到路口！','Race you to the corner!']],
+  [['b','你在听什么？','What are you listening to?'],['p','一个讲气候科学的播客。','A podcast about climate science.'],['b','也分享给我听听！','Tweet me the link!']],
+  [['p','那朵云好像一棵树。','That cloud looks like a tree.'],['b','你看什么都像树。','Everything looks like a tree to you.']]],
+ rain:[[['p','撑伞出发！今天坐公交。','Umbrella up! Let\'s take the bus.'],['b','伞下还有我的位置吗？','Room under there for me?'],['p','当然有，快进来！','Always. Hop in!']],
+  [['b','啪嗒！踩水坑最好玩。','Splash! Puddles are the best.'],['p','还好我穿了雨靴。','Good thing I wore my boots.']],
+  [['p','这场雨对花园真好。','This rain is great for the garden.'],['b','对小虫子也好，真香！','And for the worms. Yum!']]],
+ snow:[[['p','好冷！还好我多穿了一层。','Brr! Good thing I layered up.'],['b','我只要把羽毛蓬起来。','I just fluff my feathers.'],['p','暖气调低 1°C，穿上毛衣！','Heating down 1°C, jumper on!']],
+  [['b','看，你留下了脚印！','Look, you leave footprints!'],['p','这是我唯一想留下的足迹。','The only footprint I want to leave.']],
+  [['p','要借我的围巾吗？','Want to borrow my scarf?'],['b','谢谢，我也有一条小的！','I have a tiny one, thanks!']]],
+ wind:[[['p','哇，围巾要飞走了！','Whoa, my scarf is flying!'],['b','这可是免费的风能！','Free wind power, though!'],['p','没错，看我的风车转得多快！','True. Look at my pinwheel go!']],
+  [['b','我都飞不直了！','I can barely fly straight!'],['p','跟紧我，小家伙。','Stay close, little friend.']],
+  [['p','今天最适合把衣服晾外面。','Perfect day to line-dry laundry.'],['b','不用开烘干机啦！','No tumble dryer needed!']]]
+};
+const BIRDSAY=[['b','啾啾！','Chirp chirp!'],['b','我到哪儿都靠飞，零排放。','I fly everywhere. Zero emissions!'],['b','给我留点面包屑好吗？','Spare a crumb?']];
+let wkX=40,wkT=160,wkDir=1,wkRun=false,wkNext=0,wkLast=0,wkAct='',wkActEnd=0,wkStep=0,wkPoke=0,wkTimers=[],wkSayTimer=0,wkWho='p',wkConvoEnd=0,wkIdleC=0,palX=6,palDir=1,palSide=-1,palFlyEnd=0,palPoke=0;
+const wkReduced=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+function wkDo(name,ms){const el=document.getElementById('walker');if(el&&wkAct)el.classList.remove('act-'+wkAct);wkAct=name;wkActEnd=performance.now()+ms;if(el)el.classList.add('act-'+name)}
+function wkSpawn(cls,x,dx){const sc=document.querySelector('.scene');if(!sc)return;const e=document.createElement('i');e.className=cls;e.style.left=x+'px';if(dx!==undefined)e.style.setProperty('--dx',dx+'px');sc.appendChild(e);setTimeout(()=>e.remove(),2700)}
+function wkSplash(){[-14,-7,0,7,14].forEach(dx=>wkSpawn('fx-splash',wkX+27,dx));wkSpawn('fx-ripple',wkX+22)}
+function wkTick(t){
+  const el=document.getElementById('walker');const dt=Math.min(50,t-wkLast);wkLast=t;
+  if(el){
+    const W=el.parentElement.clientWidth,max=Math.max(10,W-62);wkT=Math.min(max,Math.max(6,wkT));
+    if(wkAct){if(t>wkActEnd){el.classList.remove('act-'+wkAct);wkAct='';wkNext=Math.max(wkNext,t+700+Math.random()*1200)}else el.classList.add('act-'+wkAct)}
+    const d=wkT-wkX,moving=!wkAct&&Math.abs(d)>1,inConvo=t<wkConvoEnd;
+    if(moving){
+      wkDir=d>0?1:-1;const against=state.weather==='wind'&&wkDir<0;
+      wkX+=wkDir*Math.min(Math.abs(d),dt*(wkRun?.14:.055)*(against?.6:1));
+      el.classList.toggle('against',against);if(!inConvo)wkNext=t+900+Math.random()*1800;
+      if(t>wkStep){wkStep=t+(wkRun?190:310);const fx=wkX+(wkDir>0?16:36);
+        if(state.weather==='snow')wkSpawn('fx-print',fx);else if(state.weather==='rain')wkSpawn('fx-ripple',fx);else if(wkRun)wkSpawn('fx-dust',fx,-wkDir*8)}
+    }else{
+      if(Math.abs(d)<=1)wkRun=false;
+      if(inConvo&&!wkAct)wkDir=palX+15>wkX+28?1:-1;
+      if(!wkAct&&!inConvo&&!wkReduced&&t>wkNext){const r=Math.random();
+        if(r<.5)wkT=6+Math.random()*(max-6);
+        else if(r<.66){const sp=WX[state.weather].special;wkDo(sp,sp==='splash'?1100:1900);if(sp==='splash'){setTimeout(wkSplash,430);setTimeout(wkSplash,980)}}
+        else if(r<.78)wkDo(r<.72?'wave':'look',1500);
+        else{const c=CONVO[state.weather];wkConvo(c[wkIdleC++%c.length])}
+        wkNext=t+2400}
+    }
+    const b=document.getElementById('bubble'),on=b&&b.classList.contains('on');
+    el.classList.toggle('moving',moving);el.classList.toggle('running',moving&&wkRun);el.classList.toggle('talking',!!on&&wkWho==='p');
+    el.style.transform=`translateX(${wkX}px)`;el.firstElementChild.style.transform=`scaleX(${wkDir})`;
+    const pal=document.getElementById('pal');
+    if(pal){const pc=wkX+28;if(moving)palSide=-wkDir;let want=pc+palSide*42-15;if(want<2||want>W-32){palSide=-palSide;want=pc+palSide*42-15}want=Math.max(2,Math.min(W-32,want));const pd=want-palX,flying=t<palFlyEnd,hop=Math.abs(pd)>3&&!flying;
+      if(hop){palDir=pd>0?1:-1;palX+=palDir*Math.min(Math.abs(pd),dt*(wkRun?.16:.085))}else if(!moving)palDir=pc>palX+15?1:-1;
+      pal.classList.toggle('hop',hop);pal.classList.toggle('fly',flying);pal.classList.toggle('chirp',!!on&&wkWho==='b'&&!hop&&!flying);
+      pal.style.transform=`translateX(${palX}px)`;pal.firstElementChild.style.transform=`scaleX(${palDir})`}
+    if(on){const fromPal=wkWho==='b';b.style.bottom=(fromPal?44:96)+'px';const leftSide=fromPal&&palX+15<wkX+28;b.classList.toggle('flipb',leftSide);b.style.left=Math.max(6,Math.min(W-b.offsetWidth-6,(leftSide?palX+20-b.offsetWidth:fromPal?palX+12:wkX+20)))+'px'}
+  }
+  requestAnimationFrame(wkTick);
+}
+function wkTalk(line){const b=document.getElementById('bubble');if(!b)return;wkWho=line[0];b.textContent=L([line[1],line[2]]);b.classList.toggle('from-pal',wkWho==='b');b.classList.add('on');clearTimeout(wkSayTimer);wkSayTimer=setTimeout(()=>document.getElementById('bubble')?.classList.remove('on'),2300)}
+function wkConvo(lines){wkTimers.forEach(clearTimeout);wkTimers=lines.map((l,i)=>setTimeout(()=>wkTalk(l),i*2500));wkConvoEnd=performance.now()+lines.length*2500+200}
+const wxPick=(cls,labels)=>`<div class="${cls}" role="group" aria-label="${state.lang==='en'?'Change the weather':'切换天气'}">${Object.entries(WX).map(([k,v])=>`<button class="${state.weather===k?'on':''}" data-action="weather" data-id="${k}" aria-pressed="${state.weather===k}" aria-label="${L(v.n)}" title="${L(v.n)}">${ico(v.icon)}${labels?`<span>${L(v.n)}</span>`:''}</button>`).join('')}</div>`;
+function weatherCard(){
+  const w=WX[state.weather],d0=w.days[0],en=state.lang==='en';
+  return `<section class="wx" style="background:${w.sky}" data-action="open-weather" aria-label="${en?'Weather':'天气'}">
+    <div class="wx-fx" aria-hidden="true">${wxFx(state.weather)}</div>
+    <div class="wx-info"><div class="wx-loc">${ico('pin')} ${en?'London':'伦敦'}<span class="wx-more">${en?'Forecast':'预报'} ›</span></div><div class="wx-temp">${w.t}°</div><div class="wx-cond">${L(w.n)} · ${en?'H':'高'} ${d0[2]}° ${en?'L':'低'} ${d0[1]}°</div></div>
+    ${wxPick('wx-pick',false)}
+    <div class="scene" data-action="walk-to"><div class="ground-clip"><div class="ground" style="background:${w.ground}"></div></div><div class="bubble" id="bubble" role="status"></div>
+      <button class="walker" id="walker" data-action="poke" style="transform:translateX(${wkX}px)" aria-label="${en?'Say hi to the walker':'和小人打招呼'}"><span class="flip"><span class="bob">${person(state.weather)}</span></span><span class="shadow"></span></button>
+      <button class="pal" id="pal" data-action="poke-pal" style="transform:translateX(${palX}px)" aria-label="${en?'Say hi to the bird':'和小鸟打招呼'}"><span class="flip"><span class="pb">${bird(state.weather)}</span></span></button></div>
+  </section>`;
+}
+function weatherSheet(){
+  const w=WX[state.weather],d0=w.days[0],en=state.lang==='en',now=new Date(),h=now.getHours();
+  const lo=Math.min(...w.days.map(d=>d[1])),hi=Math.max(...w.days.map(d=>d[2])),span=hi-lo||1;
+  const hours=Array.from({length:6},(_,i)=>{const hr=(h+i)%24,night=hr>=20||hr<6;const temp=Math.max(d0[1],Math.round(w.t-i*.8-(night?1:0)));const ic=i>3&&state.weather==='sunny'?'cloud':w.icon;return `<div><span>${i?hr+':00':(en?'Now':'现在')}</span>${ico(ic)}<b>${temp}°</b></div>`}).join('');
+  const days=w.days.map((d,i)=>`<div class="wx-day"><span>${i?L(WDAYS[(now.getDay()+i)%7]):(en?'Today':'今天')}</span>${ico(d[0])}<span class="lo">${d[1]}°</span><div class="wx-bar"><i style="left:${(d[1]-lo)/span*100}%;width:${(d[2]-d[1])/span*100}%"></i></div><span>${d[2]}°</span></div>`).join('');
+  return `<div class="modal-backdrop" data-action="close-modal"><section class="sheet" role="dialog" aria-modal="true" aria-label="${en?'Weather forecast':'天气预报'}"><div class="handle"></div><button class="close-btn" data-action="close-modal" aria-label="Close">${ico('x')}</button><span class="eyebrow">${en?'WEATHER · SAMPLE DATA':'天气 · 示例数据'}</span>
+   <div class="wxd" style="background:${w.sky}"><div class="wx-fx" aria-hidden="true">${wxFx(state.weather)}</div>
+    <div class="wxd-top"><div class="wx-loc">${ico('pin')} ${en?'London':'伦敦'}</div><div class="wx-temp">${w.t}°</div><div class="wx-cond">${L(w.n)} · ${en?'H':'高'} ${d0[2]}° ${en?'L':'低'} ${d0[1]}°</div><div class="wx-cond" style="margin-top:4px">${en?'Wear':'穿搭'}: ${L(w.wear)}</div></div>
+    ${wxPick('wxd-pick',true)}
+    <div class="wxd-panel"><div class="wxd-cap">${en?'Hourly forecast':'逐小时预报'}</div><div class="wx-hours">${hours}</div></div>
+    <div class="wxd-panel"><div class="wxd-cap">${en?'5-day forecast':'5 天预报'}</div>${days}</div></div>
+   <button class="btn-solid" data-action="go-challenges">🌱 ${L(w.tip)} ${ico('arrow')}</button>
+   <p class="feedback-note">${en?'Sample weather for this classroom demo, not a live forecast.':'课堂演示用的示例天气，不是实时预报。'}</p></section></div>`;
+}
+
 function hero(){return `<div class="hero"><div class="flag">✦ ${tr('eyebrow')}</div><h2>${tr('hero')}</h2><p>${tr('heroSub')}</p><button class="hero-btn" data-action="open-fact" data-id="warming">${tr('start')} →</button><div class="hero-art">${cover()}</div></div>`}
 function topbar(){return `<div class="topbar"><div class="mini-brand"><span class="brand-mark">${ico('leaf')}</span>ClimateConnect</div><div class="top-actions"><button class="icon-btn sparkle-btn" data-action="replay-intro" aria-label="${state.lang==='en'?'Replay animation':'重播欢迎动画'}" title="${state.lang==='en'?'Replay animation':'重播欢迎动画'}"><span class="sparkle-icon">✦</span></button><button class="icon-btn" data-action="lang" aria-label="Change language">${ico('globe')} ${state.lang==='en'?'中':'EN'}</button></div></div>`}
-function explore(){let filt=facts.filter(f=>state.topic==='All'||f.cat===state.topic);return `${topbar()}<h1 class="heading">${tr('hello')}</h1><p class="subheading">${tr('intro')}</p>${hero()}<div class="section-title"><h3>${tr('facts')}</h3><button class="icon-btn" data-action="show-why" aria-label="How do we verify?">${ico('info')}</button></div><div class="chiprow">${['All','Climate','Evidence','Action'].map(c=>`<button class="chip ${state.topic===c?'active':''}" data-action="topic" data-id="${c}">${tr(c.toLowerCase())}</button>`).join('')}</div><div class="article-grid">${filt.map(f=>`<button class="article-card" data-action="open-fact" data-id="${f.id}"><div class="article-art" style="background:${f.bg};font-size:36px">${f.emoji}</div><span class="article-tag">${tr(f.cat.toLowerCase())}</span><h4>${loc(f.title)}</h4><div class="article-source"><strong>${f.source}</strong><span>${ico('arrow')}</span></div></button>`).join('')}</div><div class="section-title"><h3>${tr('quiz')}</h3><span>+10 pts</span></div><div class="prompt-card"><div class="panel-title" style="font-size:13px">${tr('question')}</div>${['q1','q2','q3'].map((q)=>`<button class="answer ${state.quiz===q?'selected '+(q==='q2'?'good':'bad'):''}" data-action="quiz" data-id="${q}">${tr(q)}</button>`).join('')}${state.quiz?`<div class="quiz-result">${tr(state.quiz==='q2'?'correct':'wrong')}</div>`:`<p class="hint">${tr('select')}</p>`}<button style="border:0;background:none;padding:7px 0 0;color:#39805a;font-size:11px;font-weight:800" data-action="open-fact" data-id="warming">${tr('readMore')} ↗</button></div>`}
+function explore(){let filt=facts.filter(f=>state.topic==='All'||f.cat===state.topic);return `${topbar()}<h1 class="heading">${tr('hello')}</h1><p class="subheading">${tr('intro')}</p>${weatherCard()}${hero()}<div class="section-title"><h3>${tr('facts')}</h3><button class="icon-btn" data-action="show-why" aria-label="How do we verify?">${ico('info')}</button></div><div class="chiprow">${['All','Climate','Evidence','Action'].map(c=>`<button class="chip ${state.topic===c?'active':''}" data-action="topic" data-id="${c}">${tr(c.toLowerCase())}</button>`).join('')}</div><div class="article-grid">${filt.map(f=>`<button class="article-card" data-action="open-fact" data-id="${f.id}"><div class="article-art" style="background:${f.bg};font-size:36px">${f.emoji}</div><span class="article-tag">${tr(f.cat.toLowerCase())}</span><h4>${loc(f.title)}</h4><div class="article-source"><strong>${f.source}</strong><span>${ico('arrow')}</span></div></button>`).join('')}</div><div class="section-title"><h3>${tr('quiz')}</h3><span>+10 pts</span></div><div class="prompt-card"><div class="panel-title" style="font-size:13px">${tr('question')}</div>${['q1','q2','q3'].map((q)=>`<button class="answer ${state.quiz===q?'selected '+(q==='q2'?'good':'bad'):''}" data-action="quiz" data-id="${q}">${tr(q)}</button>`).join('')}${state.quiz?`<div class="quiz-result">${tr(state.quiz==='q2'?'correct':'wrong')}</div>`:`<p class="hint">${tr('select')}</p>`}<button style="border:0;background:none;padding:7px 0 0;color:#39805a;font-size:11px;font-weight:800" data-action="open-fact" data-id="warming">${tr('readMore')} ↗</button></div>`}
 function orgPage(){return `${topbar()}<span class="eyebrow">COMMUNICATION & TRUST</span><h1 class="heading" style="margin-top:10px">${tr('trust')}</h1><p class="subheading">${tr('trustSub')}</p><div class="panel green"><div class="panel-top"><div class="panel-emoji">🔎</div><div><div class="panel-title">${tr('charityInfo')}</div><div class="panel-caption">Reports • Registrations • Evidence</div></div></div><p>${state.lang==='en'?'Look beyond a badge: check an official report, check the issuing organisation and consider what it actually measures.':'不要只看一个“认证”标签：请查看官方报告、发布机构和数据实际衡量的内容。'}</p></div><div class="section-title"><h3>${tr('directSources')}</h3><span>${orgs.length} sources</span></div>${orgs.map(o=>`<div class="panel"><div class="panel-top"><div class="panel-emoji" style="background:${o.theme}">${o.emoji}</div><div style="flex:1"><div class="panel-title">${o.name}</div><div class="panel-caption">${loc(o.desc)}</div></div></div><div class="org-stat">${ico('shield')}<span>${loc(o.fact)}</span></div><div class="two-actions"><button class="btn-outline btn-small" data-action="org-detail" data-id="${o.id}">${tr('orgDetail')}</button><a class="btn-solid btn-small" href="${o.url}" target="_blank" rel="noopener noreferrer">${tr('report')} ↗</a></div></div>`).join('')}<div class="panel green"><div class="panel-title">${tr('example')}: ${tr('exampleHeading')}</div><p style="margin-bottom:0">${tr('exampleText')}</p></div>`}
 function feedbackPage(){return `${topbar()}<span class="eyebrow">COMMUNICATION & TRUST</span><h1 class="heading" style="margin-top:10px">${tr('feedbackTitle')}</h1><p class="subheading">${tr('feedbackSub')}</p><div class="panel"><div class="panel-title">01 · ${tr('rate')}</div><div class="rating-row">${[1,2,3,4,5].map(n=>`<button class="rate-btn ${state.rating===n?'active':''}" data-action="rate" data-id="${n}" aria-label="${n} of 5">${n}</button>`).join('')}</div><p style="font-size:10px;margin-bottom:0">1 = ${state.lang==='en'?'not clear':'不清晰'} · 5 = ${state.lang==='en'?'very clear':'非常清晰'}</p></div><div class="panel"><div class="panel-title">02 · ${tr('helpful')}</div><div class="pill-group" style="margin-top:13px">${['yes','partly','no'].map(n=>`<button class="pill-choice ${state.helpful===n?'active':''}" data-action="helpful" data-id="${n}">${tr(n)}</button>`).join('')}</div><label class="field-label" for="category">03 · ${tr('category')}</label><select class="field select" id="category" data-field="category"><option value="Clarity" ${state.category==='Clarity'?'selected':''}>${state.lang==='en'?'Clarity':'清晰度'}</option><option value="Evidence" ${state.category==='Evidence'?'selected':''}>${state.lang==='en'?'Evidence & sources':'证据和来源'}</option><option value="Accessibility" ${state.category==='Accessibility'?'selected':''}>${state.lang==='en'?'Accessibility':'易用性'}</option><option value="Other" ${state.category==='Other'?'selected':''}>${state.lang==='en'?'Other':'其他'}</option></select><label class="field-label" for="comment">${tr('comment')}</label><textarea class="field" id="comment" data-field="message" maxlength="500" placeholder="${tr('placeholder')}">${esc(state.message)}</textarea><button class="btn-solid" style="margin-top:14px" data-action="submit">${tr('submit')} ${ico('arrow')}</button><p class="feedback-note">🔒 ${tr('note')}</p></div><div class="section-title"><h3>${tr('entries')}</h3><span>${state.feedback.length}</span></div>${state.feedback.length?state.feedback.slice(0,5).map(f=>`<div class="feedback-item"><strong>⭐ ${f.rating}/5 · ${esc(f.category)}</strong><p>${esc(f.message|| (state.lang==='en'?'No additional comment.':'无补充评论'))}</p><small>${esc(f.date)}</small></div>`).join(''):`<div class="empty">${tr('empty')}</div>`}`}
 function challengePage(){let pts=points(),c=state.completed.length;return `${topbar()}<span class="eyebrow">GAMIFIED ACTION</span><h1 class="heading" style="margin-top:10px">${tr('challengeTitle')}</h1><p class="subheading">${tr('challengeSub')}</p><div class="score-summary"><small>✦ ${tr('yourImpact')}</small><strong>${pts} <span style="font-size:13px;letter-spacing:0;font-weight:500">pts</span></strong><p>${c}/${tasks.length} ${tr('done')}</p><div class="progress-bar" style="margin-top:15px;background:#ffffff35"><div style="width:${Math.round(c/tasks.length*100)}%"></div></div></div><div class="section-title"><h3>${tr('yourChallenges')}</h3><span>${c}/${tasks.length}</span></div>${tasks.map(t=>`<div class="challenge ${state.completed.includes(t.id)?'done':''}"><div class="challenge-icon">${t.emoji}</div><div class="challenge-copy"><h4>${loc(t.title)}</h4><p>${loc(t.desc)}</p><div class="challenge-bottom"><span class="points">+${t.pts} PTS</span><button class="complete-btn ${state.completed.includes(t.id)?'done':''}" data-action="complete" data-id="${t.id}">${state.completed.includes(t.id)?'✓ '+tr('completed'):tr('complete')}</button></div></div></div>`).join('')}<div class="section-title"><h3>${tr('reward')}</h3></div><div class="medals">${[[15,'🌱','first'],[35,'🌿','starter'],[65,'🏆','champion']].map(([v,e,k])=>`<div class="medal ${pts>=v?'unlocked':''}"><b>${e}</b><span>${tr(k)}<br>${v} pts</span></div>`).join('')}</div><p class="feedback-note" style="margin:15px 0">${tr('demo')}</p>`}
-function modal(){let m=state.modal;if(!m)return '';if(m.type==='fact'){let f=facts.find(x=>x.id===m.id);return `<div class="modal-backdrop" data-action="close-modal"><section class="sheet" role="dialog" aria-modal="true" aria-label="${esc(loc(f.title))}"><div class="handle"></div><button class="close-btn" data-action="close-modal" aria-label="Close">${ico('x')}</button><div style="font-size:48px;margin:15px 0 6px">${f.emoji}</div><span class="eyebrow">${tr('summary')}</span><h2>${loc(f.title)}</h2><p>${loc(f.sub)}</p><div class="source-box"><b>${ico('shield')} ${tr('verified')}: ${f.source}</b>${state.lang==='en'?'View the original scientific report to check the full context.':'查看科学机构原始报告，核对完整上下文。'}<p style="margin-bottom:0"><a href="${f.url}" target="_blank" rel="noopener noreferrer">${tr('viewSource')} ↗</a></p></div><button class="btn-solid" data-action="go-challenges">${tr('join')} ${ico('arrow')}</button></section></div>`}if(m.type==='org'){let o=orgs.find(x=>x.id===m.id);return `<div class="modal-backdrop" data-action="close-modal"><section class="sheet" role="dialog" aria-modal="true" aria-label="${esc(o.name)}"><div class="handle"></div><button class="close-btn" data-action="close-modal" aria-label="Close">${ico('x')}</button><div style="font-size:45px;margin:10px 0">${o.emoji}</div><span class="eyebrow">${tr('orgDetail')}</span><h2>${o.name}</h2><p>${loc(o.desc)} ${loc(o.fact)}</p><div class="source-box"><b>${tr('directSources')}</b><p>${esc(o.report)}</p><a href="${o.url}" target="_blank" rel="noopener noreferrer">${tr('report')} ↗</a><br><a href="${o.registry}" target="_blank" rel="noopener noreferrer">${state.lang==='en'?'Official accountability / registry':'官方公开记录 / 注册信息'} ↗</a></div><p style="font-size:10px">${tr('orgdisclaimer')}</p></section></div>`}return `<div class="modal-backdrop" data-action="close-modal"><section class="sheet" role="dialog" aria-modal="true"><div class="handle"></div><button class="close-btn" data-action="close-modal" aria-label="Close">${ico('x')}</button><h2>${tr('whyTrust')}</h2><p>${tr('whyText')}</p><div class="source-box"><a href="https://science.nasa.gov/climate-change/evidence/" target="_blank" rel="noopener noreferrer">NASA Climate Evidence ↗</a><br><a href="https://www.ipcc.ch/report/ar6/syr/summary-for-policymakers/" target="_blank" rel="noopener noreferrer">IPCC AR6 Summary ↗</a></div></section></div>`}
+function modal(){let m=state.modal;if(!m)return '';if(m.type==='weather')return weatherSheet();if(m.type==='fact'){let f=facts.find(x=>x.id===m.id);return `<div class="modal-backdrop" data-action="close-modal"><section class="sheet" role="dialog" aria-modal="true" aria-label="${esc(loc(f.title))}"><div class="handle"></div><button class="close-btn" data-action="close-modal" aria-label="Close">${ico('x')}</button><div style="font-size:48px;margin:15px 0 6px">${f.emoji}</div><span class="eyebrow">${tr('summary')}</span><h2>${loc(f.title)}</h2><p>${loc(f.sub)}</p><div class="source-box"><b>${ico('shield')} ${tr('verified')}: ${f.source}</b>${state.lang==='en'?'View the original scientific report to check the full context.':'查看科学机构原始报告，核对完整上下文。'}<p style="margin-bottom:0"><a href="${f.url}" target="_blank" rel="noopener noreferrer">${tr('viewSource')} ↗</a></p></div><button class="btn-solid" data-action="go-challenges">${tr('join')} ${ico('arrow')}</button></section></div>`}if(m.type==='org'){let o=orgs.find(x=>x.id===m.id);return `<div class="modal-backdrop" data-action="close-modal"><section class="sheet" role="dialog" aria-modal="true" aria-label="${esc(o.name)}"><div class="handle"></div><button class="close-btn" data-action="close-modal" aria-label="Close">${ico('x')}</button><div style="font-size:45px;margin:10px 0">${o.emoji}</div><span class="eyebrow">${tr('orgDetail')}</span><h2>${o.name}</h2><p>${loc(o.desc)} ${loc(o.fact)}</p><div class="source-box"><b>${tr('directSources')}</b><p>${esc(o.report)}</p><a href="${o.url}" target="_blank" rel="noopener noreferrer">${tr('report')} ↗</a><br><a href="${o.registry}" target="_blank" rel="noopener noreferrer">${state.lang==='en'?'Official accountability / registry':'官方公开记录 / 注册信息'} ↗</a></div><p style="font-size:10px">${tr('orgdisclaimer')}</p></section></div>`}return `<div class="modal-backdrop" data-action="close-modal"><section class="sheet" role="dialog" aria-modal="true"><div class="handle"></div><button class="close-btn" data-action="close-modal" aria-label="Close">${ico('x')}</button><h2>${tr('whyTrust')}</h2><p>${tr('whyText')}</p><div class="source-box"><a href="https://science.nasa.gov/climate-change/evidence/" target="_blank" rel="noopener noreferrer">NASA Climate Evidence ↗</a><br><a href="https://www.ipcc.ch/report/ar6/syr/summary-for-policymakers/" target="_blank" rel="noopener noreferrer">IPCC AR6 Summary ↗</a></div></section></div>`}
 
 function welcome(){
   if(!state.onboarding)return '';
@@ -181,8 +489,9 @@ function celebrate(kind,value=0,badge=''){
 }
 
 function nav(){return `<nav class="nav" aria-label="Main navigation">${[['explore','book'],['orgs','shield'],['feedback','chat'],['challenges','award']].map(([k,ic])=>`<button class="nav-btn ${state.tab===k?'active':''}" data-action="nav" data-id="${k}" aria-current="${state.tab===k?'page':'false'}"><span class="nav-icon">${ico(ic)}</span>${tr(k)}</button>`).join('')}</nav>`}
-function render(){let sc=document.getElementById('scroll');let prevScroll=sc?sc.scrollTop:0;document.documentElement.lang=state.lang;document.getElementById('app').innerHTML=`<main class="stage"><aside class="showcase"><div class="logo-row"><span class="brand-mark">${ico('leaf')}</span><span class="brand-name">ClimateConnect</span></div><span class="eyebrow">ANIMATED INTERACTIVE PROTOTYPE</span><h1>Build trust.<br><span>Inspire climate action.</span></h1><p>An animated learning journey with verified climate facts, transparent charity reporting, two-way feedback and rewarding everyday actions.</p><div class="features"><div class="feature"><i>${ico('book')}</i> Explore source-linked climate facts</div><div class="feature"><i>${ico('shield')}</i> Review charities' original reports</div><div class="feature"><i>${ico('chat')}</i> Give feedback in a two-way design concept</div><div class="feature"><i>${ico('award')}</i> Complete challenges and earn demo rewards</div></div><p class="showcase-note">CLASSROOM DEMO · Tap ✦ in the app header to replay the intro animation. Sample data stays on this device.</p></aside><div class="phone-wrap"><section class="phone" aria-label="ClimateConnect mobile prototype"><div class="screen"><div class="statusbar"><span>9:41</span><span class="status-icons">${ico('globe')} ● ▰</span></div><div class="scroll-view" id="scroll">${state.tab==='explore'?explore():state.tab==='orgs'?orgPage():state.tab==='feedback'?feedbackPage():challengePage()}<div style="height:20px"></div></div>${nav()}<div id="toast" class="toast" role="status"></div>${modal()}${welcome()}</div></section></div></main><footer class="site-footer">ClimateConnect is an independent class prototype, not affiliated with NASA, IPCC or the listed charities. External links require internet access. <button data-action="reset" style="border:none;background:transparent;color:#568369;text-decoration:underline;cursor:pointer">Reset demo</button></footer>`;document.getElementById('scroll').scrollTop=prevScroll}
-let toastTimer=0;function toast(msg){const el=document.getElementById('toast');if(!el)return;el.textContent=msg;el.classList.add('on');clearTimeout(toastTimer);toastTimer=setTimeout(()=>el.classList.remove('on'),2500)}
+function render(){let sc=document.getElementById('scroll');let prevScroll=sc?sc.scrollTop:0;document.documentElement.lang=state.lang;document.getElementById('app').innerHTML=`<main class="stage"><aside class="showcase"><div class="logo-row"><span class="brand-mark">${ico('leaf')}</span><span class="brand-name">ClimateConnect</span></div><span class="eyebrow">ANIMATED INTERACTIVE PROTOTYPE</span><h1>Build trust.<br><span>Inspire climate action.</span></h1><p>An animated learning journey with verified climate facts, transparent charity reporting, two-way feedback and rewarding everyday actions.</p><div class="features"><div class="feature"><i>${ico('book')}</i> Explore source-linked climate facts</div><div class="feature"><i>${ico('shield')}</i> Review charities' original reports</div><div class="feature"><i>${ico('chat')}</i> Give feedback in a two-way design concept</div><div class="feature"><i>${ico('award')}</i> Complete challenges and earn demo rewards</div></div><p class="showcase-note">CLASSROOM DEMO · Tap ✦ in the app header to replay the intro animation. Sample data stays on this device.</p></aside><div class="phone-wrap"><section class="phone" aria-label="ClimateConnect mobile prototype"><div class="screen"><div class="statusbar"><span>9:41</span><span class="status-icons">${ico('globe')} ● ▰</span></div><div class="scroll-view" id="scroll">${state.tab==='explore'?explore():state.tab==='orgs'?orgPage():state.tab==='feedback'?feedbackPage():challengePage()}<div style="height:20px"></div></div>${nav()}<div id="toast" class="toast" role="status"></div>${modal()}${welcome()}</div></section></div></main><footer class="site-footer">ClimateConnect is an independent class prototype, not affiliated with NASA, IPCC or the listed charities. External links require internet access. <button data-action="reset" style="border:none;background:transparent;color:#568369;text-decoration:underline;cursor:pointer">Reset demo</button></footer>`;document.getElementById('scroll').scrollTop=prevScroll;const mk=state.modal?state.modal.type:'';if(mk&&mk===lastModalKey)document.querySelector('.modal-backdrop')?.classList.add('still');lastModalKey=mk}
+let lastModalKey='';
+let resetAsk=0;let toastTimer=0;function toast(msg){const el=document.getElementById('toast');if(!el)return;el.textContent=msg;el.classList.add('on');clearTimeout(toastTimer);toastTimer=setTimeout(()=>el.classList.remove('on'),2500)}
 let isNavigating=false;
 function navigate(k){
   if(isNavigating)return;
@@ -207,12 +516,18 @@ document.addEventListener('click',e=>{let el=e.target.closest('[data-action]');i
 if(a==='intro-next'){if(state.introStep>=2)finishWelcome();else{state.introStep++;render()}return}
 if(a==='intro-skip'){finishWelcome();return}
 if(a==='replay-intro'){state.onboarding=true;state.introStep=0;render();return}
+if(a==='weather'){state.weather=id;save();render();wkDo('change',650);wkConvo(CONVO[id][0]);return}
+if(a==='open-weather'){state.modal={type:'weather'};render();return}
+if(a==='walk-to'){const r=el.getBoundingClientRect();wkT=e.clientX-r.left-28;wkRun=Math.abs(wkT-wkX)>90;if(wkAct){document.getElementById('walker')?.classList.remove('act-'+wkAct);wkAct=''}return}
+if(a==='poke'){const acts=['jump','spin','wave'];wkDo(acts[wkPoke%3],wkPoke%3===2?1500:700);const c=CONVO[state.weather];wkConvo(c[wkPoke%c.length]);wkPoke++;return}
+if(a==='poke-pal'){palFlyEnd=performance.now()+1200;wkConvo([BIRDSAY[palPoke++%BIRDSAY.length]]);return}
 if(a==='nav')return navigate(id);if(a==='lang'){state.lang=state.lang==='en'?'zh':'en';save();render();return}if(a==='topic'){state.topic=id;render();return}if(a==='open-fact'){state.modal={type:'fact',id};render();return}if(a==='org-detail'){state.modal={type:'org',id};render();return}if(a==='show-why'){state.modal={type:'why'};render();return}if(a==='close-modal'){state.modal=null;render();return}if(a==='go-challenges')return navigate('challenges');if(a==='rate'){state.rating=+id;render();return}if(a==='helpful'){state.helpful=id;render();return}if(a==='quiz'){if(state.quiz==='q2'){toast(state.lang==='en'?'Quiz already completed!':'答题积分已领取！');return}state.quiz=id;save();render();if(id==='q2')celebrate('points',10);return}if(a==='complete'){
 const before=points();const wasDone=state.completed.includes(id);
 state.completed=wasDone?state.completed.filter(x=>x!==id):[...state.completed,id];save();render();
 if(!wasDone){const delta=points()-before;const unlocked=[15,35,65].find(v=>before<v&&points()>=v);celebrate('points',delta,unlocked===undefined?'':unlocked)}
-else toast(state.lang==='en'?'Challenge marked incomplete.':'已取消完成。');return} if(a==='submit'){if(!state.rating){toast(tr('rateNeeded'));return}if(!state.helpful){toast(tr('voteNeeded'));return}state.feedback.unshift({rating:state.rating,helpful:state.helpful,category:state.category,message:state.message.trim().slice(0,500),date:new Date().toLocaleDateString(state.lang==='en'?'en-GB':'zh-CN')});state.rating=0;state.helpful='';state.message='';save();render();celebrate('feedback');return}if(a==='reset'){if(window.confirm(tr('confirmReset'))){try{localStorage.removeItem(SKEY)}catch(err){}state.completed=[];state.feedback=[];state.quiz='';state.rating=0;state.helpful='';state.message='';render();toast(tr('resetDone'))}}});
+else toast(state.lang==='en'?'Challenge marked incomplete.':'已取消完成。');return} if(a==='submit'){if(!state.rating){toast(tr('rateNeeded'));return}if(!state.helpful){toast(tr('voteNeeded'));return}state.feedback.unshift({rating:state.rating,helpful:state.helpful,category:state.category,message:state.message.trim().slice(0,500),date:new Date().toLocaleDateString(state.lang==='en'?'en-GB':'zh-CN')});state.rating=0;state.helpful='';state.message='';save();render();celebrate('feedback');return}if(a==='reset'){if(Date.now()-resetAsk>4000){resetAsk=Date.now();toast(state.lang==='en'?'Tap Reset demo again to confirm.':'再点一次“Reset demo”确认重置。');return}{resetAsk=0;try{localStorage.removeItem(SKEY)}catch(err){}state.completed=[];state.feedback=[];state.quiz='';state.rating=0;state.helpful='';state.message='';render();toast(tr('resetDone'))}}});
 render();
+requestAnimationFrame(wkTick);
 })();
 </script>
 </body>

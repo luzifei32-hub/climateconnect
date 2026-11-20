@@ -12,7 +12,7 @@ body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font);-web
 main{max-width:1080px;margin:0 auto;padding:48px 24px 40px}
 h1{font-size:clamp(30px,4vw,44px);letter-spacing:-1.2px;margin:0 0 10px;text-wrap:balance}
 .lead{color:var(--muted);font-size:16px;line-height:1.6;max-width:640px;margin:0 0 34px}
-.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
 .card{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:22px;display:flex;flex-direction:column;gap:12px}
 .card.now{border:2px solid var(--green)}
 .v{display:flex;align-items:center;justify-content:space-between}
@@ -32,28 +32,21 @@ footer{margin-top:28px;font-size:12px;color:var(--muted)}
 <body>
 <main>
 <h1>ClimateConnect: how the prototype changed</h1>
-<p class="lead">Three versions of the same app. Each opens as its own site, so you can try them side by side.</p>
+<p class="lead">Two versions of the same app. Each opens as its own site, so you can try them side by side.</p>
 <div class="grid">
 <section class="card">
-<div class="v"><b>VERSION 1</b><span class="pill">Original</span></div>
-<h2>Facts, charities, feedback</h2>
-<p class="trig">Starting point.</p>
-<ul><li>Source-linked climate facts</li><li>Charity cards with report links</li><li>One general feedback form</li><li>Challenges and badges</li></ul>
+<div class="v"><b>VERSION 1</b><span class="pill">First version</span></div>
+<h2>Weather on the home screen</h2>
+<p class="trig">Starting point, with an everyday weather entry point.</p>
+<ul><li>Apple-style weather card</li><li>Walking character who dresses for the weather</li><li>Bird companion and dialogue</li><li>Source-linked facts, charity reports, feedback form, challenges</li></ul>
 <a class="go" href="../v1/">Open version 1 ↗</a>
 </section>
-<section class="card">
-<div class="v"><b>VERSION 2</b><span class="pill">Weather context</span></div>
-<h2>Weather on the home screen</h2>
-<p class="trig">Added an everyday entry point.</p>
-<ul><li>Apple-style weather card</li><li>Walking character who dresses for the weather</li><li>Bird companion and dialogue</li><li>All version 1 screens kept</li></ul>
-<a class="go" href="../v2/">Open version 2 ↗</a>
-</section>
 <section class="card now">
-<div class="v"><b>VERSION 3</b><span class="pill">Current</span></div>
+<div class="v"><b>VERSION 2</b><span class="pill">Current</span></div>
 <h2>Check, vet and talk back</h2>
 <p class="trig">Changed after prototype review.</p>
 <ul><li>Home leads with a claim to check: source, date, publisher</li><li>Three questions on each charity card</li><li>Talk page: feedback on one claim, sent to one organisation, with a receipt</li><li>Community forum</li><li>Rewards kept out of trust ratings</li><li>Weather moved to local context</li></ul>
-<a class="go" href="../v3/">Open version 3 ↗</a>
+<a class="go" href="../v2/">Open version 2 ↗</a>
 </section>
 </div>
 <footer>Independent class prototype. Sample data and simulated sending; nothing is sent to any organisation.</footer>
