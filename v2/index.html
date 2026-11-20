@@ -264,7 +264,7 @@
 <script>
 (() => {
 'use strict';
-const SKEY='climateconnect-prototype-v2';
+const SKEY='cc-iteration-v2';
 function load(){try{return JSON.parse(localStorage.getItem(SKEY)||'{}')||{}}catch(e){return {}}}
 let saved=load();
 let state={weather:saved.weather||'sunny',tab:'explore',topic:'All',lang:saved.lang||'en',rating:0,helpful:'',category:'Clarity',message:'',modal:null,quiz: saved.quiz||'',completed: saved.completed||[],feedback: saved.feedback||[]};
